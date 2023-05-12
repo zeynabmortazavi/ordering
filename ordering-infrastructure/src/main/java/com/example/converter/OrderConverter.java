@@ -1,7 +1,7 @@
-package converter;
+package com.example.converter;
 
-import domain.model.OrderDto;
-import entity.Order;
+import com.example.domain.model.OrderDto;
+import com.example.entity.Order;
 import org.springframework.stereotype.Component;
 
 @Component

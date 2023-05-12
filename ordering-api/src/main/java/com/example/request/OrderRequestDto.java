@@ -1,6 +1,6 @@
-package request;
+package com.example.request;
 
-import domain.model.OrderDto;
+import com.example.domain.model.OrderDto;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 

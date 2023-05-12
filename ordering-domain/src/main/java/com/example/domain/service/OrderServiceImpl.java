@@ -1,7 +1,7 @@
-package domain.service;
+package com.example.domain.service;
 
-import domain.model.OrderDto;
-import domain.repository.OrderRepository;
+import com.example.domain.model.OrderDto;
+import com.example.domain.repository.OrderRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

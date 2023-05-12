@@ -1,12 +1,12 @@
-package controller;
+package com.example.controller;
 
 
-import api.OrderFacade;
-import domain.service.OrderService;
+import com.example.api.OrderFacade;
+import com.example.response.OrderResponseDto;
+import com.example.domain.service.OrderService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.RestController;
-import request.OrderRequestDto;
-import response.OrderResponseDto;
+import com.example.request.OrderRequestDto;
 
 @AllArgsConstructor
 @RestController

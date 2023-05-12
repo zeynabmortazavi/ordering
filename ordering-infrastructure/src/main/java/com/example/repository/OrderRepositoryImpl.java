@@ -1,9 +1,12 @@
-import converter.OrderConverter;
-import domain.model.OrderDto;
-import domain.repository.OrderRepository;
-import lombok.AllArgsConstructor;
-import repository.JpaOrderRepository;
+package com.example.repository;
 
+import com.example.converter.OrderConverter;
+import com.example.domain.model.OrderDto;
+import com.example.domain.repository.OrderRepository;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Component;
+
+@Component
 @AllArgsConstructor
 public class OrderRepositoryImpl implements OrderRepository {
 

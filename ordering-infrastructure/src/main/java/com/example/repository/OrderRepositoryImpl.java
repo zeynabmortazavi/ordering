@@ -16,4 +16,12 @@ public class OrderRepositoryImpl implements OrderRepository {
     public void save(OrderDto orderDto) {
         orderRepository.save(orderConverter.convertToOrder(orderDto));
     }
+
+    @Override
+    public OrderDto update(OrderDto orderDto) {
+        if(!orderRepository.existsById(orderDto.getId())){
+            throw new RuntimeException(String.format("there is no order by id : %d", orderDto.getId()));
+        }
+        return orderConverter.convertToOrderDto(orderRepository.save(orderConverter.convertToOrder(orderDto)));
+    }
 }

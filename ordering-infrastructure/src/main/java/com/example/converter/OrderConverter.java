@@ -13,4 +13,12 @@ public class OrderConverter {
         order.setPrice(orderDto.getPrice());
         return order;
     }
+
+    public OrderDto convertToOrderDto(Order order) {
+        OrderDto orderDto = new OrderDto();
+        orderDto.setId(order.getId());
+        orderDto.setName(order.getName());
+        orderDto.setPrice(order.getPrice());
+        return orderDto;
+    }
 }

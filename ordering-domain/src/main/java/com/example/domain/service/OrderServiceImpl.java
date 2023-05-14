@@ -14,4 +14,9 @@ public class OrderServiceImpl implements OrderService {
         orderRepository.save(orderDto);
         return orderDto.getId();
     }
+
+    @Override
+    public OrderDto updateOrder(OrderDto orderDto) {
+        return orderRepository.update(orderDto);
+    }
 }

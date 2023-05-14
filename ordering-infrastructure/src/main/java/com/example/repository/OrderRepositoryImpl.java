@@ -7,6 +7,9 @@ import com.example.entity.Order;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Component
 @AllArgsConstructor
 public class OrderRepositoryImpl implements OrderRepository {
@@ -44,5 +47,12 @@ public class OrderRepositoryImpl implements OrderRepository {
                 () -> new RuntimeException(String.format("there is no order by id : %d", orderId))
         );
         return orderConverter.convertToOrderDto(existingOrder);
+    }
+
+    @Override
+    public List<OrderDto> getAllOrders() {
+        List<Order> orders = orderRepository.findAll();
+        return orders.stream().map(orderConverter::convertToOrderDto)
+                .collect(Collectors.toList());
     }
 }

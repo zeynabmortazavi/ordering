@@ -5,6 +5,8 @@ import com.example.domain.repository.OrderRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @AllArgsConstructor
 public class OrderServiceImpl implements OrderService {
@@ -28,5 +30,10 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public OrderDto getOrderById(Long orderId) {
         return orderRepository.getOrderById(orderId);
+    }
+
+    @Override
+    public List<OrderDto> getAllOrders() {
+        return orderRepository.getAllOrders();
     }
 }

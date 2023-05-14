@@ -2,6 +2,7 @@ package com.example.controller;
 
 
 import com.example.converter.ControllerOrderConverter;
+import com.example.domain.model.OrderDto;
 import com.example.response.OrderResponseDto;
 import com.example.domain.service.OrderService;
 import lombok.AllArgsConstructor;
@@ -9,6 +10,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.example.request.OrderRequestDto;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @RestController
@@ -37,4 +41,9 @@ public class OrderController {
         return controllerOrderConverter.ConvertToOrderResponseDto(orderService.getOrderById(orderId));
     }
 
+    @GetMapping
+    public List<OrderResponseDto> getAllOrders(){
+        List<OrderDto> orderDtoList = orderService.getAllOrders();
+        return orderDtoList.stream().map(controllerOrderConverter::ConvertToOrderResponseDto).collect(Collectors.toList());
+    }
 }

@@ -3,6 +3,7 @@ package com.example.repository;
 import com.example.converter.OrderConverter;
 import com.example.domain.model.OrderDto;
 import com.example.domain.repository.OrderRepository;
+import com.example.entity.Order;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -19,9 +20,21 @@ public class OrderRepositoryImpl implements OrderRepository {
 
     @Override
     public OrderDto update(OrderDto orderDto) {
-        if(!orderRepository.existsById(orderDto.getId())){
-            throw new RuntimeException(String.format("there is no order by id : %d", orderDto.getId()));
-        }
-        return orderConverter.convertToOrderDto(orderRepository.save(orderConverter.convertToOrder(orderDto)));
+
+        Order existingOrder = orderRepository.findById(orderDto.getId()).orElseThrow(
+                () -> new RuntimeException(String.format("there is no order by id : %d", orderDto.getId()))
+        );
+
+        existingOrder.setName(orderDto.getName());
+        existingOrder.setPrice(orderDto.getPrice());
+        return orderConverter.convertToOrderDto(orderRepository.save(existingOrder));
+    }
+
+    @Override
+    public void deleteOrder(Long orderId) {
+        Order existingOrder = orderRepository.findById(orderId).orElseThrow(
+                () -> new RuntimeException(String.format("there is no order by id : %d", orderId))
+        );
+        orderRepository.deleteById(existingOrder.getId());
     }
 }

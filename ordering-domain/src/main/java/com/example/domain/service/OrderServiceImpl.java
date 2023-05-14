@@ -19,4 +19,9 @@ public class OrderServiceImpl implements OrderService {
     public OrderDto updateOrder(OrderDto orderDto) {
         return orderRepository.update(orderDto);
     }
+
+    @Override
+    public void deleteOrder(Long orderId) {
+        orderRepository.deleteOrder(orderId);
+    }
 }

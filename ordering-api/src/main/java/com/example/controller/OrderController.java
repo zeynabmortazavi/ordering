@@ -5,6 +5,8 @@ import com.example.converter.ControllerOrderConverter;
 import com.example.response.OrderResponseDto;
 import com.example.domain.service.OrderService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.example.request.OrderRequestDto;
 
@@ -20,8 +22,14 @@ public class OrderController {
     }
 
     @PutMapping("/update")
-    public OrderResponseDto updateBook(@RequestBody OrderRequestDto orderRequestDto) {
+    public OrderResponseDto updateOrder(@RequestBody OrderRequestDto orderRequestDto) {
         return controllerOrderConverter.ConvertToOrderResponseDto(orderService.updateOrder(orderRequestDto.getOrderDto()));
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<String> deleteOrder(@PathVariable("id") Long orderId){
+        orderService.deleteOrder(orderId);
+        return new ResponseEntity<>("Order successfully deleted!", HttpStatus.OK);
     }
 
 }

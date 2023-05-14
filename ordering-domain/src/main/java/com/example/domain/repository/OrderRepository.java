@@ -6,4 +6,6 @@ public interface OrderRepository {
     void save(OrderDto orderDto);
     OrderDto update(OrderDto orderDto);
     void deleteOrder(Long orderId);
+
+    OrderDto getOrderById(Long orderId);
 }

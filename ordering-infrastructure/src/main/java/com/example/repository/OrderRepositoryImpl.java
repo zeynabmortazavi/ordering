@@ -37,4 +37,12 @@ public class OrderRepositoryImpl implements OrderRepository {
         );
         orderRepository.deleteById(existingOrder.getId());
     }
+
+    @Override
+    public OrderDto getOrderById(Long orderId) {
+        Order existingOrder = orderRepository.findById(orderId).orElseThrow(
+                () -> new RuntimeException(String.format("there is no order by id : %d", orderId))
+        );
+        return orderConverter.convertToOrderDto(existingOrder);
+    }
 }

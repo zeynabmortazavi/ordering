@@ -32,4 +32,9 @@ public class OrderController {
         return new ResponseEntity<>("Order successfully deleted!", HttpStatus.OK);
     }
 
+    @GetMapping("{id}")
+    public OrderResponseDto getOrderById(@PathVariable("id") Long orderId){
+        return controllerOrderConverter.ConvertToOrderResponseDto(orderService.getOrderById(orderId));
+    }
+
 }

@@ -1,0 +1,5 @@
+ordering-server:
+  container_name: ordering-server
+  image: orderingApp:latest
+  ports:
+    - 8080:8080

@@ -1,28 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
+    <property name="ROOT_LEVEL" value="WARN"/>
+    <property name="APPLICATION_LEVEL" value="INFO"/>
+    <property name="STACK_TRACE_COUNT" value="15"/>
+
+    <property name="PATTERN" scope="context"
+              value="%date{yyyy-MM-dd'T'HH:mm:ss.SSS} %-7([%level])  %logger{40}.%method@%line:%n  %message %rootException{${STACK_TRACE_COUNT}}%n"/>
     <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>%d [%thread] %-5level %-50logger{40} - %msg%n</pattern>
+            <pattern>${PATTERN}</pattern>
         </encoder>
     </appender>
 
-    <appender name="RollingFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>./logs/OrderingApp.log</file>
-        <encoder>
-            <pattern>%d [%thread] %-5level %-50logger{40} - %msg%n</pattern>
-        </encoder>
-
+    <appender name="ROLLING" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/Ordering.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
-            <fileNamePattern>Ordering-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
-            <maxFileSize>1MB</maxFileSize>
-            <maxHistory>30</maxHistory>
-            <totalSizeCap>10MB</totalSizeCap>
-            <cleanHistoryOnStart>true</cleanHistoryOnStart>
+            <fileNamePattern>logs/Ordering-%d{yyyy-MM-dd_HH}.%i.log.zip</fileNamePattern>
+            <maxFileSize>200MB</maxFileSize>
         </rollingPolicy>
+        <encoder>
+            <pattern>${PATTERN}</pattern>
+        </encoder>
     </appender>
 
-    <root level="INFO">
+    <logger name="com.example" additivity="true" level="${APPLICATION_LEVEL}"/>
+
+    <root level="${ROOT_LEVEL}">
         <appender-ref ref="Console" />
-        <appender-ref ref="RollingFile" />
+        <appender-ref ref="ROLLING" />
     </root>
 </configuration>

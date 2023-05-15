@@ -2,6 +2,7 @@ package com.example.ordering;
 
 import com.example.domain.model.OrderDto;
 import com.example.request.OrderRequestDto;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,23 +25,27 @@ public class OrderControllerITest {
     @Autowired
     private TestRestTemplate restTemplate;
 
-    HttpHeaders headers = new HttpHeaders();
-
-    @Test
-    public void testAddOrderService() {
-        OrderRequestDto orderRequestDto;
+    HttpHeaders headers;
+    OrderRequestDto orderRequestDto;
+    @Before
+    public void setUp(){
+        headers = new HttpHeaders();
         orderRequestDto = new OrderRequestDto();
         OrderDto orderDto = new OrderDto();
         orderDto.setId(1L);
         orderDto.setName("shoe");
         orderDto.setPrice(BigDecimal.valueOf(20000));
         orderRequestDto.setOrderDto(orderDto);
+    }
+    @Test
+    public void testAddOrderService() {
         HttpEntity<OrderRequestDto> request = new HttpEntity<>(orderRequestDto,headers);
         var response = this.restTemplate.postForObject(ADD_ORDER_URL, request, LinkedHashMap.class);
         System.out.println(response.get("id"));
     }
     @Test
     public void testUpdateOrderService() {
+        testAddOrderService();
         Map<String, String> params = new HashMap<>();
         params.put("id", "1");
 
